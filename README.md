@@ -1,12 +1,3 @@
-# Import + Export Components
-
-// Here we will see Why need to import and export Components
-//Make new file for components (UserComponents.jsx created)
-//Export Component- (i)Default export (ii)Named export (iii)Multiple export
-//Import Component- (i)Default import (ii)Named import (iii)Multiple import
-
-with some more details on them.
-
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
