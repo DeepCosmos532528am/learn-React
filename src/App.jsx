@@ -1,15 +1,17 @@
-import JSXreact from './JSX.jsx'
-import PracticeJSX from './practiceJSX/practice.jsx'
+import EventsReact, { HandleClickkk } from './events.jsx'
+import PracticeJSX from './practiceEvents/practice.jsx'
 
-function App(){
-return (
-  <div>
-    {/* <PracticeJSX /> */}
-    <JSXreact />
-    <PracticeJSX/>
 
-    <h1>This is my App.jsx</h1>
-  </div>
-)
+function App() {
+  return (
+    <div>
+      {/* <PracticeJSX /> */}
+      <EventsReact />
+      <HandleClickkk />
+      <PracticeJSX />
+
+      <h1>This is my App.jsx</h1>
+    </div>
+  )
 }
 export default App;  
