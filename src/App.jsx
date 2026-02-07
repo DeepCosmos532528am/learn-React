@@ -1,16 +1,13 @@
-import EventsReact, { HandleClickkk } from './events.jsx'
-import PracticeJSX from './practiceEvents/practice.jsx'
+import ReactState from './state.jsx'
+import PracticeState from './practiceState/practice.jsx'
 
 
 function App() {
   return (
     <div>
-      {/* <PracticeJSX /> */}
-      <EventsReact />
-      <HandleClickkk />
-      <PracticeJSX />
-
       <h1>This is my App.jsx</h1>
+      <ReactState />
+      <PracticeState />
     </div>
   )
 }
