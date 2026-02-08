@@ -1,5 +1,6 @@
 import Main from './props.jsx'
-// import PracticeState from './practiceProps/practice.jsx'
+import Main2 from './defaultprops.jsx'
+import Wrapper2 from './wrapper2.jsx'
 
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <div>
       <h1>This is my App.jsx</h1>
       <Main />
-      {/* <PracticeState/> */}
+      <Main2 />
+      <Wrapper2 />
     </div>
   )
 }

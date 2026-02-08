@@ -30,7 +30,7 @@ function User2(props){ //this method is called standard method to pass the objec
 }
 // OR
 
-function User22({passobj = age}){//Is point pe hi automatically through destructuring mechanism, props. ho jata h. This method is called destructuring method to pass the object through props and then we can access the value of the object directly through passobj.name.
+function User22({passobj, age}){//Is point pe hi automatically through destructuring mechanism, props. ho jata h. This method is called destructuring method to pass the object through props and then we can access the value of the object directly through passobj.name.
 
     return(<h1>Hello: {passobj.name} and age is {age}</h1>)
 }
@@ -44,9 +44,9 @@ function User22({passobj = age}){//Is point pe hi automatically through destruct
 // This is equivalent to accessing them through props.passobj or props.age but is more concise and easier to work with. 
 
 //Array Passing through props-----------------------------
-function User3({arr, secValue}){ //Here we are passing the array through props and then we can access the value of the array through arr[0] or secValue.
+function User3({arr, secValue}){
     return(
-        <h1>This is the Array: First value {arr[0]}, Second value {secValue}</h1>
+        <h1>This is the Array: First value {arr[0]} and Second value {secValue}</h1>
     )
 }
 
