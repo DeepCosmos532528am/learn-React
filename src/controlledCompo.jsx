@@ -1,158 +1,52 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-// 📖 All‑in‑One Definition of Controlled Components
-// A controlled component in React is a form element (like <input>, <textarea>, or <select>) whose displayed value is always driven by React state, making the state the single source of truth. The component’s value is passed in via props (value={state}), and any user interaction triggers an event handler (like onChange) that updates the state. Because React fully controls the input, the behavior becomes predictable, allowing developers to enforce validation, formatting, and dynamic updates from external sources (such as props or API data). This ensures that the UI and the underlying data are always in sync, whether the change comes from user typing or external logic.
+//Lets see how to handle the radio input in react. We will create a component that will have a radio input and we will handle the change event of the radio input.
 
-// Why This Matters
+function RadioInput() {
+  const [selectedOption, setSelectedOption] = useState([]);
 
-//1. Single source of truth: The component’s value is always in sync with React state, making it easier to manage and debug form data.
+  const handleOptionChange = (event) => {
+    console.log("Event id and the target check status", event.target.id, ":", event.target.checked);
+    const { value, checked } = event.target;
+    setSelectedOption((prev) =>
+      // Functional update (prev => ...) hamesha latest state ki guarantee deta hai
+      checked
+        ? [...prev, value] //this says Agar checked hai toh add karo. here the new array is being created by [ ] brackets, inwhich the previous array + current event value is being added to spread the values in the new array, so its like selectedOption = [new array assignement] pehle default me empty array diya tha in useState([]). wese yaha .Concat() bhi kaam kar jayega, but spread is more readable and easy to understand.  
+        : prev.filter((item) => item !== value) // Agar uncheck hai toh hatao, here the filter method is used to create a new array by filtering out the value that is being unchecked, so its like selectedOption = [new array assignement] pehle default me empty array diya tha in useState([]
 
-function SingleSource() {
-  const [city, setCity] = useState("Gwalior");
+    )
+  }
 
-  return (
-    <div>
-      <input
-        type="text"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-      />
-      <p>React knows the city: {city}</p>
-    </div>
-  );
+  console.log('End.............................')
+
+  return <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <h1>Select you Skills</h1>
+
+    <input type="checkbox" value="PHP" id='php' onClick={handleOptionChange} />
+    <label htmlFor="php">PHP</label>
+
+    <input type="checkbox" value='Java' id='java' onClick={handleOptionChange} />
+    <label htmlFor="java">Java</label>
+
+    <input type="checkbox" value='Python' id="python" onClick={handleOptionChange} />
+    <label htmlFor="python">Python</label>
+
+    <input type="checkbox" value='JavaScript' id="javascript" onClick={handleOptionChange} />
+    <label htmlFor="javascript">JavaScript</label>
+
+    <h1>The Selected Options are: {(selectedOption.toString()).toUpperCase()}</h1>
+
+  </div>
 }
 
-/**👉 The only place where the real value lives is React state (city). The DOM doesn’t decide anything — it just mirrors the state. That’s why React is the single source of truth. */
-
-//2. Validation and formatting: You can easily enforce input rules (e.g., only numbers, uppercase) and manipulate the value (like converting to uppercase) before updating the state.
-
-//🔹 Example 1: Only Numbers Allowed
-
-function OnlyNumbers() {
-  const [age, setAge] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    // Allow only digits
-    if (/^\d*$/.test(value)) {
-      setAge(value);
-    }
-  };
-
-  return (
-    <div>
-      <input
-        type="text"
-        value={age}
-        onChange={handleChange}
-        placeholder="Enter age"
-      />
-      <p>Your age: {age}</p>
-    </div>
-  );
-}
-
-/**👉 User agar letters type karega toh wo ignore ho jaayega. Sirf numbers hi accept honge. */
-
-//🔹 Example 2: Force Uppercase
-
-function UppercaseInput() {
-  const [text, setText] = useState("");
-
-  const handleChange = (e) => {
-    setText(e.target.value.toUpperCase());
-  };
-
-  return (
-    <div>
-      <input
-        type="text"
-        value={text}
-        onChange={handleChange}
-        placeholder="Type something"
-      />
-      <p>Formatted Value: {text}</p>
-    </div>
-  );
-}
-
-/**👉 User jo bhi type karega, wo automatically uppercase mein convert ho jaayega. React is controlling the formatting before it updates the state. */
-
-//🔹 Example 3: Email Validation
-
-function EmailValidation() {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [color, setColor] = useState("");
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-
-    // Simple validation
-    if (value && !value.includes("@")) {
-      setError("Invalid email: must contain @");
-      setColor("red")
-    } else if (value && value.includes("@")) {
-      setError("hmm...Going good");
-      setColor("green")
-    } else {
-      setError("");
-      setColor("")
-    }
-  };
-
-  return (
-    <div>
-      <input
-        type="email"
-        value={email}
-        onChange={handleChange}
-        placeholder="Enter email"
-      />
-      <p style={{ color: color }}>{error}</p>
-    </div>
-  );
-}
-
-/**Yahan tum live validation kar sakte ho. User jaise hi galat format type karega, error message show ho jaayega.*/
-
-
-//3 Dynamic Updates: Useful when prefilling forms, syncing across components, or resetting after submit.
-
-function DynamicUpdate({ externalValue }) {
-  const [name, setName] = useState("");
-
-  useEffect(() => {
-    setName(externalValue); // sync with external changes
-  }, [externalValue]);
-
-  return (
-    <div>
-      <input
-        type="text"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <p>Dynamic value: {name}</p>
-    </div>
-  );
-}
-/** 
-Prefilling forms with API data (e.g., user profile).Resetting inputs after submit.Syncing across multiple components. */
-
-function ControlledCompo() {
+function HandleCheckBox() {
 
   return (
     <div>
       <h1>Controlled Components Examples</h1>
-      <SingleSource />
-      <OnlyNumbers />
-      <UppercaseInput />
-      <EmailValidation />
-      <DynamicUpdate externalValue="JohnDoe" />
+      <RadioInput />
     </div>
   );
 }
 
-export default ControlledCompo;
+export default HandleCheckBox;
