@@ -1,4 +1,5 @@
-import {useState} from 'react'
+import { useState } from 'react'
+import { useEffect } from 'react'
 // 📖 All‑in‑One Definition of Controlled Components
 // A controlled component in React is a form element (like <input>, <textarea>, or <select>) whose displayed value is always driven by React state, making the state the single source of truth. The component’s value is passed in via props (value={state}), and any user interaction triggers an event handler (like onChange) that updates the state. Because React fully controls the input, the behavior becomes predictable, allowing developers to enforce validation, formatting, and dynamic updates from external sources (such as props or API data). This ensures that the UI and the underlying data are always in sync, whether the change comes from user typing or external logic.
 
@@ -11,10 +12,10 @@ function SingleSource() {
 
   return (
     <div>
-      <input 
-        type="text" 
-        value={city} 
-        onChange={(e) => setCity(e.target.value)} 
+      <input
+        type="text"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
       />
       <p>React knows the city: {city}</p>
     </div>
@@ -40,10 +41,10 @@ function OnlyNumbers() {
 
   return (
     <div>
-      <input 
-        type="text" 
-        value={age} 
-        onChange={handleChange} 
+      <input
+        type="text"
+        value={age}
+        onChange={handleChange}
         placeholder="Enter age"
       />
       <p>Your age: {age}</p>
@@ -64,10 +65,10 @@ function UppercaseInput() {
 
   return (
     <div>
-      <input 
-        type="text" 
-        value={text} 
-        onChange={handleChange} 
+      <input
+        type="text"
+        value={text}
+        onChange={handleChange}
         placeholder="Type something"
       />
       <p>Formatted Value: {text}</p>
@@ -82,28 +83,34 @@ function UppercaseInput() {
 function EmailValidation() {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
+  const [color, setColor] = useState("");
 
   const handleChange = (e) => {
     const value = e.target.value;
     setEmail(value);
 
     // Simple validation
-    if (!value.includes("@")) {
+    if (value && !value.includes("@")) {
       setError("Invalid email: must contain @");
+      setColor("red")
+    } else if (value && value.includes("@")) {
+      setError("hmm...Going good");
+      setColor("green")
     } else {
       setError("");
+      setColor("")
     }
   };
 
   return (
     <div>
-      <input 
-        type="email" 
-        value={email} 
-        onChange={handleChange} 
+      <input
+        type="email"
+        value={email}
+        onChange={handleChange}
         placeholder="Enter email"
       />
-      <p>{error}</p>
+      <p style={{ color: color }}>{error}</p>
     </div>
   );
 }
@@ -122,10 +129,10 @@ function DynamicUpdate({ externalValue }) {
 
   return (
     <div>
-      <input 
-        type="text" 
-        value={name} 
-        onChange={(e) => setName(e.target.value)} 
+      <input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
       />
       <p>Dynamic value: {name}</p>
     </div>
@@ -134,4 +141,18 @@ function DynamicUpdate({ externalValue }) {
 /** 
 Prefilling forms with API data (e.g., user profile).Resetting inputs after submit.Syncing across multiple components. */
 
-export {SingleSource, OnlyNumbers, UppercaseInput, EmailValidation, DynamicUpdate}
+function ControlledCompo() {
+
+  return (
+    <div>
+      <h1>Controlled Components Examples</h1>
+      <SingleSource />
+      <OnlyNumbers />
+      <UppercaseInput />
+      <EmailValidation />
+      <DynamicUpdate externalValue="JohnDoe" />
+    </div>
+  );
+}
+
+export default ControlledCompo;
