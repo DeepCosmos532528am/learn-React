@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-//Lets see how to handle the radio input in react. We will create a component that will have a radio input and we will handle the change event of the radio input.
+//Lets see how to handle the Checkbox input in react. We will create a component that will have a checkbox input and we will handle the change event of the Checkbox input.
 
-function RadioInput() {
+function CheckboxInput() {
   const [selectedOption, setSelectedOption] = useState([]);
 
   const handleOptionChange = (event) => {
@@ -44,7 +44,7 @@ function HandleCheckBox() {
   return (
     <div>
       <h1>Controlled Components Examples</h1>
-      <RadioInput />
+      <CheckboxInput />
     </div>
   );
 }
