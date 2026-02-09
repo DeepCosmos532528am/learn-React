@@ -1,52 +1,87 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
-//Lets see how to handle the Checkbox input in react. We will create a component that will have a checkbox input and we will handle the change event of the Checkbox input.
+//Lets see how to handle the Radio input in react. We will create a component that will have a Radio input and we will handle the change event of the Radio input.
 
-function CheckboxInput() {
-  const [selectedOption, setSelectedOption] = useState([]);
+function RadioInput() {
 
-  const handleOptionChange = (event) => {
+
+  const [gender, setGender] = useState('select your gender');
+
+  const handlegenderChange = (event) => {
     console.log("Event id and the target check status", event.target.id, ":", event.target.checked);
-    const { value, checked } = event.target;
-    setSelectedOption((prev) =>
-      // Functional update (prev => ...) hamesha latest state ki guarantee deta hai
-      checked
-        ? [...prev, value] //this says Agar checked hai toh add karo. here the new array is being created by [ ] brackets, inwhich the previous array + current event value is being added to spread the values in the new array, so its like selectedOption = [new array assignement] pehle default me empty array diya tha in useState([]). wese yaha .Concat() bhi kaam kar jayega, but spread is more readable and easy to understand.  
-        : prev.filter((item) => item !== value) // Agar uncheck hai toh hatao, here the filter method is used to create a new array by filtering out the value that is being unchecked, so its like selectedOption = [new array assignement] pehle default me empty array diya tha in useState([]
+    const { value } = event.target
 
-    )
+    setGender(prev => value)
   }
 
-  console.log('End.............................')
+  //This is the not recommended way to handle radio inputs in react.
+  // return <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+  //   <h1>You are: {gender}</h1>
 
-  return <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-    <h1>Select you Skills</h1>
+  //     <input type='radio' value='male' id='male' name='gender' onClick={handlegenderChange} /> 
+  //     {/**ye value dalna zaroori hota h inputs me kyu tabhi wo value event.target.value me jaati h  */}
+  //   <label htmlFor="id">male</label>
+  //   <input type='radio' value='female' id='female' name='gender' onClick={handlegenderChange} />
+  //   <label htmlFor="female">Female</label>
+  //   <input type='radio' value='other' id='other' name='gender' onClick={handlegenderChange} />
+  //   <label htmlFor="other">Other</label>
 
-    <input type="checkbox" value="PHP" id='php' onClick={handleOptionChange} />
-    <label htmlFor="php">PHP</label>
+  return (<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+    <hr />
 
-    <input type="checkbox" value='Java' id='java' onClick={handleOptionChange} />
-    <label htmlFor="java">Java</label>
+    <h1>The recommended way to apply the radio handling</h1>
 
-    <input type="checkbox" value='Python' id="python" onClick={handleOptionChange} />
-    <label htmlFor="python">Python</label>
+    <h1>You are: {gender}</h1>
 
-    <input type="checkbox" value='JavaScript' id="javascript" onClick={handleOptionChange} />
-    <label htmlFor="javascript">JavaScript</label>
 
-    <h1>The Selected Options are: {(selectedOption.toString()).toUpperCase()}</h1>
+    <input type='radio' value='male' id='male' name='gender' checked={gender == 'male'} onChange={handlegenderChange} /> {/**ye value dalna zaroori hota h inputs me kyu tabhi wo value event.target.value me jaati h  */}
+    <label htmlFor="male">male</label>
+    <input type='radio' value='female' id='female' name='gender' checked={gender == 'female'} onChange={handlegenderChange} />
+    <label htmlFor="female">Female</label>
+    <input type='radio' value='other' id='other' name='gender' checked={gender == 'other'} onChange={handlegenderChange} />
+    <label htmlFor="other">Other</label>
 
-  </div>
+  </div>)
+
 }
 
-function HandleCheckBox() {
+
+function DropDown() {
+
+
+
+  const [course, setCourse] = useState('');
+
+  return (
+
+
+    <div>
+      <hr />
+      <h1>DropDown Example: {course}</h1>
+
+      <select defaultValue={"default"} onChange={(e) => setCourse(e.target.value)}>
+        <option value="default" disabled>Choose the course you want to fly with</option>
+        <option value="Operating System" >Operating System</option>
+        <option value="Computer Networks" >Computer Networks</option>
+        <option value="data Structure" >Data Structure</option>
+      </select>
+
+    </div>
+  )
+
+}
+
+
+
+function HandleRadio() {
 
   return (
     <div>
       <h1>Controlled Components Examples</h1>
-      <CheckboxInput />
+      <RadioInput />
+      <DropDown />
     </div>
   );
 }
 
-export default HandleCheckBox;
+export default HandleRadio;
