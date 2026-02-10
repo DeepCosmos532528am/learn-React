@@ -1,10 +1,10 @@
-import ReusableCardComponent from "./reusable";
+import UserListContainer from "./UserListContainer";
 
 function App() {
   return (
     <div>
       <h1>This is my App.jsx</h1>
-      <ReusableCardComponent />
+      < UserListContainer />
     </div>
   )
 }
