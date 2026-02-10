@@ -1,10 +1,10 @@
-import LoopDemo from "./loops";
+import ReusableCardComponent from "./reusable";
 
 function App() {
   return (
     <div>
       <h1>This is my App.jsx</h1>
-      <LoopDemo />
+      <ReusableCardComponent />
     </div>
   )
 }
