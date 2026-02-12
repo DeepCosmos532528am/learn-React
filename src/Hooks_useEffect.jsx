@@ -14,52 +14,70 @@ It also supports cleanup functions, which help prevent memory leaks by cleaning 
 In short: Hooks enable functional components to have state and lifecycle capabilities, and useEffect manages all side effects in a predictable and controlled way, keeping React applications efficient and maintainable. */
 
 
-
-
 const UseEffectComponents = () => {
   const [counter, setCounter] = useState(0);
   const [data, setData] = useState(0);
 
-  //when even the empty dependecy array is not passed---- 
-  useEffect(() => {countonCall()})
-
-  function countonCall() {
-    console.log("no dependecy array given, Har render par chalega")
+  function func() {
+    console.log("Main Component")
   }
-
-  //when want to just call the function one time the component renders, provide no dependency empty array----
-
-  //countOnCall()//go in browser and look in console in inspection window. Issue is on clicking the buttom, click event occurs and it changes just the state of counter i.e. updating the value, but why this function,countOnCall() is getting call everytime. This is because, on each state update the component re-renders, so this function also gets call everytime. Solution is useEffect
-
-  useEffect(() => { countOnCall1() }, []) //  this get called for one time when the component renders for the first time
-  function countOnCall1() {
-    console.log("no dependency state..,Sirf Pehli baar (Mounting)")
-  }
-
-  //when want to pass one state---------------------------
-
-  useEffect(() => { countOnCall2() }, [data])
-
-  function countOnCall2() {
-    console.log("Sirf Data change par,One dependency state...")
-  }//But this function be called on every time the state changes of the data state only, but still for counter state it will not be called as there is only data there in dependency array of the useEffect above.
-
-  //Passing more than one state---------------------------
-
-  useEffect(() => { countOncall3() }, [data, counter])
-
-  const countOncall3 = () => { console.log("Data ya Counter change par,more than one dependency state...") }
+  func()
 
   //-------Return the UI----------------------------------
   return (
     <div style={{ padding: '30px' }}>
       <h1>Hello, Counter is: {counter}</h1>
       <button onClick={() => setCounter(counter + 1)}>Counter: {counter}</button>
-      <button onClick={() => setData(data + 1)}>data: {data}</button>
+      <button onClick={() => setData(data + 1)}>data:{data}</button>
+      <User />{/**as this component called here it will also be re-rendered, and checked for any state change, even if have not passed anything still react will check for any state update to update the UI likewise.*/}
+
+      <User2 prop={{ counts: counter, data: data }} />
     </div>
   );
 };
 
+//  see the child component also rendered in the same way as the parent, becuase it is called in the parent component, so child component in one way is the part of parent component only. 
+
+//hence any function call or in general and broad term the re-rendering, in the child will indeed be triggred on any changes in child component state but also will be rendered on any state change in parent also.
+
+//if the child is consuming any prop passed from parent, and there is any change in that particular parent state lined to the child also, the child also will use that. Obviously its very obvious, I know You know! 
+
+////here as the updated state prop counts coming here updated, User Component is getting updated everytime, we can see in the console in the browser, this function executes on every change on state in the parent Component. 
+
+// Let's handle this, by using useEffect hook!
+
+
+function User() {
+  function funcCall() {
+    console.log("Child compo,rendered on trigger of parent render")
+  }
+  //here we can handle this unwanted re rendering by using useEffect hook, but I have intentionally commented out it below, so that you can see the effect in the console for this function call funcCall(). Happy funcCall()! 
+
+  // useEffect(function (){funcCall},[]) //comment out and check console on every change and re-render
+
+  return <h1> Hey</h1>
+} //This function renders everytime
+
+//let's create one component where we will see how that component being a child component will consume the prop and is handeled by the useEffect for preventing the unwanted function call in that.
+
+const User2 = ({ prop }) => {
+
+  //Now I want the function to be called when there is any update in the counter state only, but not any unwanted call and UI showing for data state update,UI for data update in this compo. will be shown on updating the counter only lets use useEffect hook for handling this   
+
+  const [a, setCount] = useState('')
+  const [b, setData] = useState('')
+
+  useEffect(() => { func() }, [prop.counts]) //prop.count state change pe hi current value from the parent will be provided to this child compo, but on data  update useEffect call hi nahi hone dega func() ko so setData me new value enter hi nahi kar payegi , hence no UI update for the data in returning JSX element below in this component.
+
+  function func() {
+    setCount(prop.counts)  
+    setData(prop.data)
+    console.log(`counter : ${a} \n data: ${b}`)
+
+  }
+
+  return <h1>counter: {a} <br></br> dat:{b}</h1>
+}
 
 
 
