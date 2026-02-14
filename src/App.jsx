@@ -1,11 +1,12 @@
 import React from "react";
-import Dashboard ,{Parent} from "./Memos&PureComponents";
+import TransitionHook, {UseTransition} from "./usetransition";
+
 function App() {
   return (
     <div>
       <h1>This is my App.jsx</h1>
-      <Dashboard/>
-      <Parent/> 
+      <TransitionHook />
+      <UseTransition />
     </div>
   )
 }
