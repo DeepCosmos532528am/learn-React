@@ -1,10 +1,11 @@
-import ContextAPI from "./contextAPI";
+import BioProvider, {User} from "./customHooks";
 
 
 function App() {
   return (
        <div style={{ padding: "20px" }}>
-      <ContextAPI />
+        <BioProvider/>
+      <User />
     </div>
   );
 }
