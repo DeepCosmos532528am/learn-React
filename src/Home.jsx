@@ -38,59 +38,59 @@ export default Home;
  * ******************************
  */
 
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
+// import React from 'react';
+// import { BrowserRouter as Router, Routes, Route, Link, NavLink } from 'react-router-dom';
 
-/* COMPONENT BINDING:
-  Navbar ko <Routes> ke BAHAR rakhte hain taaki wo "Persistent" (hamesha dikhne wala) rahe.
-*/
+// /* COMPONENT BINDING:
+//   Navbar ko <Routes> ke BAHAR rakhte hain taaki wo "Persistent" (hamesha dikhne wala) rahe.
+// */
 
-const Navbar = () => {
-  return (
-    <nav className="navbar">
-      {/* SHART: NavLink automatically 'active' class add karta hai 
-         jab URL match ho jata hai.
-      */}
-      <NavLink to="/" end>Home</NavLink>
-      <NavLink to="/about">About</NavLink>
-      <NavLink to="/dashboard">Dashboard</NavLink>
-    </nav>
-  );
-};
+// const Navbar = () => {
+//   return (
+//     <nav className="navbar">
+//       {/* SHART: NavLink automatically 'active' class add karta hai 
+//          jab URL match ho jata hai.
+//       */}
+//       <NavLink to="/" end>Home</NavLink>
+//       <NavLink to="/about">About</NavLink>
+//       <NavLink to="/dashboard">Dashboard</NavLink>
+//     </nav>
+//   );
+// };
 
-const App = () => {
-  return (
-    <Router>
-      <Navbar />
+// const App = () => {
+//   return (
+//     <Router>
+//       <Navbar />
 
-      <main className="main-section">
-        {/* 3. THE SWITCH (Routes & Route)
-          - <Routes>: Yeh ek container hai jo best match dhoondta hai.
-          - <Route>: Isme 'path' (URL) aur 'element' (Component) bind hote hain.
-        */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
+//       <main className="main-section">
+//         {/* 3. THE SWITCH (Routes & Route)
+//           - <Routes>: Yeh ek container hai jo best match dhoondta hai.
+//           - <Route>: Isme 'path' (URL) aur 'element' (Component) bind hote hain.
+//         */}
+//         <Routes>
+//           <Route path="/" element={<Home />} />
+//           <Route path="/about" element={<About />} />
           
-          {/* INTERVIEW TRICK: Dynamic Routing (Params)
-            ':' ka matlab hai 'id' kuch bhi ho sakti hai. 
-            Isse useParams() hook se access karte hain.
-          */}
-          <Route path="/user/:id" element={<UserProfile />} />
+//           {/* INTERVIEW TRICK: Dynamic Routing (Params)
+//             ':' ka matlab hai 'id' kuch bhi ho sakti hai. 
+//             Isse useParams() hook se access karte hain.
+//           */}
+//           <Route path="/user/:id" element={<UserProfile />} />
 
-          {/* 4. 404 PAGE (The Wildcard)
-            - path="*" ka matlab hai agar upar koi match nahi mila, toh ye chalega.
-          */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
+//           {/* 4. 404 PAGE (The Wildcard)
+//             - path="*" ka matlab hai agar upar koi match nahi mila, toh ye chalega.
+//           */}
+//           <Route path="*" element={<NotFound />} />
+//         </Routes>
+//       </main>
 
-      <footer className="footer-section">
-        <p>Fixed Footer - Won't Re-render on route change</p>
-      </footer>
-    </Router>
-  );
-};
+//       <footer className="footer-section">
+//         <p>Fixed Footer - Won't Re-render on route change</p>
+//       </footer>
+//     </Router>
+//   );
+// };
 
 /**
  * 🧠 INTERVIEW Q&A BITES (Quick Revision)
@@ -105,7 +105,7 @@ const App = () => {
  * Ans: Outlet acts as a placeholder for child components in a layout.
  */
 
-export default App;
+// export default App;
 
 /* FINAL SUMMARY TABLE:
   -------------------------------------------------------------
